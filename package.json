@@ -1,0 +1,12 @@
+{
+  "name": "flatmatesBackend",
+  "version": "1.0.0",
+  "description": "Backend for flatmates website",
+  "main": "app.js",
+  "author": "Naad Borole, Piyush Sharma, Aniket Rathod, Om Shende",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^9.9.0"
+  }
+}
