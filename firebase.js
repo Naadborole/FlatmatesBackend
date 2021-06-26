@@ -8,6 +8,13 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+const verifyTokenGetUid = async (token) =>{
+  const decodedToken = await admin.auth().verifyIdToken(token)
+  const uid = decodedToken.uid
+  console.log(uid)
+  return uid
+}
+
 // const createUser = async (email, displayName, password) => { //Register user in firebase auth system
 //   const userRecord = await admin.auth().createUser({
 //     email: email,
@@ -27,3 +34,4 @@ const db = admin.firestore();
 // module.exports.addUserToDB = addUserToDB;
 module.exports.db = db;
 module.exports.admin = admin;
+module.exports.verifyTokenGetUid = verifyTokenGetUid;
