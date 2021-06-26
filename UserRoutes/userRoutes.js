@@ -1,6 +1,6 @@
 //const {createUser, addUserToDB} =  require("../firebase.js");
 const {/*createUser, addUserToDB*/ addUser} =  require("../controllers/UserController");
-const { addPost , userGetPost , getAllPost} = require('../controllers/PostController');
+const { addPost , userGetPost , getAllPost , getPost , updatePost , deletePost} = require('../controllers/PostController');
 const express = require("express"); 
 const userRoute = express.Router();
 
@@ -23,7 +23,10 @@ userRoute.get("/", (req, res, next) => {
 
 userRoute.post("/signup", addUser);
 userRoute.post('/createPost', addPost);
-userRoute.get('/getPost/:id', userGetPost);
-userRoute.get('/getPost', getAllPost);
+userRoute.get('/userGetPost/:id', userGetPost);
+userRoute.get('/getAllPost', getAllPost);
+userRoute.get('/getPost/:id', getPost);
+userRoute.put('/updatePost/:id', updatePost);
+userRoute.delete('/deletePost/:id', deletePost);
 
 module.exports.userRoute =  userRoute;

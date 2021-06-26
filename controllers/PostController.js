@@ -64,7 +64,48 @@ const userGetPost = async (req, res, next) => {
     }
 }
 
+const getPost = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const post = await db.collection('Posts').doc(id);
+        const data = await post.get();
+        if(!data.exists) {
+            res.status(404).send('Post with the given ID not found');
+        }else {
+            res.send(data.data());
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const updatePost = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const post =  await db.collection('Posts').doc(id);
+        await post.update(data);
+        res.send('post data updated successfuly');        
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const deletePost = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await db.collection("Posts").doc(id).delete();
+        res.send('Post successfully deleted.'); 
+    } catch(error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 module.exports.addPost = addPost;
 module.exports.userGetPost = userGetPost;
 module.exports.getAllPost = getAllPost;
+module.exports.getPost = getPost;
+module.exports.updatePost = updatePost;
+module.exports.deletePost = deletePost;
 
