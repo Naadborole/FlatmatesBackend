@@ -6,22 +6,24 @@ admin.initializeApp({
   databaseURL: "https://findflatmates-1d452-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
 
-const database = admin.firestore();
+const db = admin.firestore();
 
-const createUser = async (email, displayName, password) => { //Register user in firebase auth system
-  const userRecord = await admin.auth().createUser({
-    email: email,
-    password: password,
-    displayName: displayName,
-    disabled: false,
-  })
-  console.log(userRecord);
-  return userRecord.uid;
-}
+// const createUser = async (email, displayName, password) => { //Register user in firebase auth system
+//   const userRecord = await admin.auth().createUser({
+//     email: email,
+//     password: password,
+//     displayName: displayName,
+//     disabled: false,
+//   })
+//   console.log(userRecord);
+//   return userRecord.uid;
+// }
 
-const addUserToDB = async (user, uid) =>{
-  await database.collection('Users').doc(uid).set(user); //Add user details to database i.e. Firestore under the collection Users
-}
+// const addUserToDB = async (user, uid) =>{
+//   await database.collection('Users').doc(uid).set(user); //Add user details to database i.e. Firestore under the collection Users
+// }
 
-module.exports.createUser = createUser;
-module.exports.addUserToDB = addUserToDB;
+// module.exports.createUser = createUser;
+// module.exports.addUserToDB = addUserToDB;
+module.exports.db = db;
+module.exports.admin = admin;
