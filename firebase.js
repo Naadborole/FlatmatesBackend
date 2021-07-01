@@ -11,6 +11,7 @@ const db = admin.firestore();
 const verifyTokenGetUid = async (token) =>{
   const decodedToken = await admin.auth().verifyIdToken(token)
   const uid = decodedToken.uid
+  console.log(decodedToken);
   console.log(uid)
   return uid
 }

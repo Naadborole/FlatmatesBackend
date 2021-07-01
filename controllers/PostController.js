@@ -1,10 +1,15 @@
-const { db } = require('../firebase');
+const { db , verifyTokenGetUid } = require('../firebase');
 const Post = require('../models/Post');
-
+const fetch = require('node-fetch');
 
 const addPost = async (req, res, next) => {
-    try {
+    try { 
+        // token = await fetch("http://localhost:3000/test");
+        // console.log(token);      
+        token = req.body.token;
+        const uid = await verifyTokenGetUid(token);       
         const data = req.body;
+        data['uid'] = uid;
         await db.collection('Posts').doc().set(data);
         res.send('Record saved successfuly');
     } catch (error) {
