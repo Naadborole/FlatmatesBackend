@@ -1,9 +1,7 @@
-'use strict';
-
 
 // const admin = require('firebase-admin');
 
-const {db, admin} = require('../firebase');
+const {db, admin , verifyTokenGetUid} = require('../firebase');
 //const User = require('../models/User');
 
 
@@ -47,6 +45,43 @@ const addUser = async (req, res, next) => {
     }
   };
 
+  const getUserbytoken = async (req, res, next) => {
+    try {
+        token = req.body.token;
+        const uid = await verifyTokenGetUid(token);
+        console.log("uid",uid);
+        const user = await db.collection('Users').doc(uid);
+        const data = await user.get();
+        console.log(data.data());
+        if(!data.exists) {
+            res.status(404).send('User with the given ID not found');
+        }else {
+            res.send(data.data());
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const getUserid = async (req, res, next) => {
+  try {
+      const id = req.params.id;
+      console.log("id",id);
+      const user = await db.collection('Users').doc(id);
+      const data = await user.get();
+      console.log(data.data());
+      if(!data.exists) {
+          res.status(404).send('Post with the given ID not found');
+      }else {
+          res.send(data.data());
+      }
+  } catch (error) {
+      res.status(400).send(error.message);
+  }
+}
+
 // module.exports.createUser = createUser;
 // module.exports.addUserToDB = addUserToDB;
 module.exports.addUser = addUser;
+module.exports.getUserid = getUserid;
+module.exports.getUserbytoken = getUserbytoken;

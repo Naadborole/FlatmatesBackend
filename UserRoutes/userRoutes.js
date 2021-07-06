@@ -1,5 +1,5 @@
 //const {createUser, addUserToDB} =  require("../firebase.js");
-const {/*createUser, addUserToDB*/ addUser} =  require("../controllers/UserController");
+const {/*createUser, addUserToDB*/ addUser , getUserid , getUserbytoken } =  require("../controllers/UserController");
 const { addPost , userGetPost , getAllPost , getPost , updatePost , deletePost} = require('../controllers/PostController');
 const express = require("express"); 
 const userRoute = express.Router();
@@ -30,6 +30,8 @@ userRoute.get('/getAllPost', getAllPost);
 userRoute.get('/getPost/:id', getPost);
 userRoute.put('/updatePost/:id', updatePost);
 userRoute.delete('/deletePost/:id', deletePost);
+userRoute.get('/getUserid/:id', getUserid);
+userRoute.post('/getUserbytoken', getUserbytoken);
 
 userRoute.post('/verify', /*async*/ (req,res,next) =>{
   token = req.body.token
