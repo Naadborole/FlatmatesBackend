@@ -53,7 +53,9 @@ const getAllPost = async (req, res, next) => {
 
 const userGetPost = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        // const id = req.params.id;
+        token = req.body.token;
+        const uid = await verifyTokenGetUid(token);
         const getPost = await db.collection('Posts');
         const data = await getPost.get();
         const postsArray = [];
@@ -61,13 +63,21 @@ const userGetPost = async (req, res, next) => {
             res.status(404).send('User Post with the given ID not found');
         }else {
             data.forEach(doc => {
-                if(doc.data().uid == id)
+                if(doc.data().uid == uid)
                 {
                     const post1 = new Post(
+                        doc.data().firstname,
+                        doc.data().lastname,
+                        doc.data().gender,
+                        doc.data().vacancy,
+                        doc.data().city,
+                        doc.data().addressline1,
+                        doc.data().profession,
+                        doc.data().ImgUrl,
                         doc.data().description,
                         doc.data().rent,
-                        doc.data().flat,
-                        doc.data().uid
+                        doc.data().uid,
+                        doc.id
                     );
                     postsArray.push(post1);
                 }   
@@ -98,8 +108,10 @@ const getPost = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        // const id = req.params.id;
         const data = req.body;
+        const id = data.pid;
+        console.log("id",id)
         const post =  await db.collection('Posts').doc(id);
         await post.update(data);
         res.send('post data updated successfuly');        

@@ -25,10 +25,10 @@ userRoute.get("/", (req, res, next) => {
 
 userRoute.post("/signup", addUser);
 userRoute.post('/createPost', addPost);
-userRoute.get('/userGetPost/:id', userGetPost);
+userRoute.post('/userGetPost', userGetPost);
 userRoute.get('/getAllPost', getAllPost);
 userRoute.get('/getPost/:id', getPost);
-userRoute.put('/updatePost/:id', updatePost);
+userRoute.put('/updatePost', updatePost);
 userRoute.delete('/deletePost/:id', deletePost);
 userRoute.get('/getUserid/:id', getUserid);
 userRoute.post('/getUserbytoken', getUserbytoken);
