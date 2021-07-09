@@ -80,8 +80,23 @@ const getUserid = async (req, res, next) => {
   }
 }
 
+const UpdateUser = async (req, res, next) => {
+    try {
+        token = req.body.token;
+        const data = req.body.user;
+        const id = await verifyTokenGetUid(token);
+        console.log("uid",id);
+        const user =  await db.collection('Users').doc(id);
+        await user.update(data);
+        res.send('user data updated successfuly');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+  }
+
 // module.exports.createUser = createUser;
 // module.exports.addUserToDB = addUserToDB;
 module.exports.addUser = addUser;
 module.exports.getUserid = getUserid;
 module.exports.getUserbytoken = getUserbytoken;
+module.exports.UpdateUser = UpdateUser;
