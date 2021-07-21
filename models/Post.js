@@ -1,5 +1,5 @@
 class Post {
-    constructor(firstname, lastname, gender, vacancy, city, addressline1, profession, ImgUrl = [], description, rent, uid, pid)
+    constructor(firstname, lastname, gender, vacancy, city, addressline1, profession, ImgUrl = [], description, rent, uid, pid, state, postalCode, addressline2)
     {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -13,6 +13,9 @@ class Post {
         this.uid = uid;
         this.pid = pid;
         this.ImgUrl = ImgUrl;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.addressline2 = addressline2;
     }
     // constructor(id, firstName, lastName, fatherName, classEnrolled,
     //     age, phoneNumber, subject, year, semester, status ) {

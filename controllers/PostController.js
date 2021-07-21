@@ -77,7 +77,10 @@ const userGetPost = async (req, res, next) => {
                         doc.data().description,
                         doc.data().rent,
                         doc.data().uid,
-                        doc.id
+                        doc.id,
+                        doc.data().state,
+                        doc.data().postalCode,
+                        doc.data().addressline2
                     );
                     postsArray.push(post1);
                 }   
