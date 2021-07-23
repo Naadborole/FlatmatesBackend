@@ -63,6 +63,17 @@ const addUser = async (req, res, next) => {
     }
 }
 
+const getUID = async (req, res, next) => {
+    try {
+        token = req.body.token;
+        const uid = await verifyTokenGetUid(token);
+        console.log("uid",uid);
+        res.send(uid);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 const getUserid = async (req, res, next) => {
   try {
       const id = req.params.id;
@@ -94,9 +105,21 @@ const UpdateUser = async (req, res, next) => {
     }
   }
 
+const DeleteUser = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await db.collection("Users").doc(id).delete();
+        res.send('User successfully deleted.'); 
+    } catch(error) {
+        res.status(400).send(error.message);
+    }
+}
+
 // module.exports.createUser = createUser;
 // module.exports.addUserToDB = addUserToDB;
 module.exports.addUser = addUser;
 module.exports.getUserid = getUserid;
 module.exports.getUserbytoken = getUserbytoken;
 module.exports.UpdateUser = UpdateUser;
+module.exports.DeleteUser = DeleteUser;
+module.exports.getUID = getUID;
