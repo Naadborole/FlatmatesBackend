@@ -20,16 +20,16 @@ const {db, admin , verifyTokenGetUid} = require('../firebase');
 // }
 
 const addUserToDB = async (user, uid) =>{
-    await db.collection('Users').doc(uid).set(user); //Add user details to database i.e. Firestore under the collection Users
+    await db.collection('Users').doc(uid).set(user); //Add user details to database that is Firestore under the collection Users
   }
 
 const addUser = async (req, res, next) => {
     try{
         const user = req.body.user;
         const uid = req.body.uid;
-        console.log(req.body);
-        console.log(user);
-        console.log(uid);
+        // console.log(req.body);
+        // console.log(user);
+        // console.log(uid);
         //createUser(user.email, user.displayName, user.password)
         addUserToDB(user, uid)
         .then(
