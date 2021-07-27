@@ -6,7 +6,7 @@
   "author": "Naad Borole, Piyush Sharma, Aniket Rathod, Om Shende",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "private": true,
   "dependencies": {
