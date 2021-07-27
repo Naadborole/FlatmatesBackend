@@ -13,7 +13,7 @@ const addPost = async (req, res, next) => {
         data['uid'] = uid;
         await db.collection('Posts').doc().set(data);
         res.send('Record saved successfuly');
-        console.log("Record saved successfuly");
+        //console.log("Record saved successfuly");
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -98,10 +98,10 @@ const userGetPost = async (req, res, next) => {
 const getPost = async (req, res, next) => {
     try {
         const id = req.params.id;
-        console.log("id",id);
+        //console.log("id",id);
         const post = await db.collection('Posts').doc(id);
         const data = await post.get();
-        console.log(data.data());
+        //console.log(data.data());
         if(!data.exists) {
             res.status(404).send('Post with the given ID not found');
         }else {
@@ -117,7 +117,7 @@ const updatePost = async (req, res, next) => {
         // const id = req.params.id;
         const data = req.body;
         const id = data.pid;
-        console.log("id",id)
+        //console.log("id",id)
         const post =  await db.collection('Posts').doc(id);
         await post.update(data);
         res.send('post data updated successfuly');        

@@ -49,10 +49,10 @@ const addUser = async (req, res, next) => {
     try {
         token = req.body.token;
         const uid = await verifyTokenGetUid(token);
-        console.log("uid",uid);
+        //console.log("uid",uid);
         const user = await db.collection('Users').doc(uid);
         const data = await user.get();
-        console.log(data.data());
+        //console.log(data.data());
         if(!data.exists) {
             res.status(404).send('User with the given ID not found');
         }else {
@@ -67,7 +67,7 @@ const getUID = async (req, res, next) => {
     try {
         token = req.body.token;
         const uid = await verifyTokenGetUid(token);
-        console.log("uid",uid);
+        //console.log("uid",uid);
         res.send(uid);
     } catch (error) {
         res.status(400).send(error.message);
@@ -77,10 +77,10 @@ const getUID = async (req, res, next) => {
 const getUserid = async (req, res, next) => {
   try {
       const id = req.params.id;
-      console.log("id",id);
+      //console.log("id",id);
       const user = await db.collection('Users').doc(id);
       const data = await user.get();
-      console.log(data.data());
+      //console.log(data.data());
       if(!data.exists) {
           res.status(404).send('Post with the given ID not found');
       }else {
@@ -96,7 +96,7 @@ const UpdateUser = async (req, res, next) => {
         token = req.body.token;
         const data = req.body.user;
         const id = await verifyTokenGetUid(token);
-        console.log("uid",id);
+        //console.log("uid",id);
         const user =  await db.collection('Users').doc(id);
         await user.update(data);
         res.send('user data updated successfuly');
